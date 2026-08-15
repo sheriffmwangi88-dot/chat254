@@ -1,0 +1,16 @@
+ {
+  "name": "CHAT 254 Translator",
+  "short_name": "CHAT 254",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#111827",
+  "description": "CHAT 254 mobile translation app",
+  "categories": [
+    "education",
+    "utilities"
+  ],
+  "icons": []
+ }
