@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CHAT 254</title>
+
+<style>
+
+/* =================================
+   BASIC RESET
+================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: #07152f;
+  color: white;
+}
+
+
+/* =================================
+   PROFESSIONAL ANDROID SPLASH
+================================= */
+
+#openingScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      #173c78 0%,
+      #0d2450 35%,
+      #07152f 75%
+    );
+
+  animation: splashOut 0.45s ease forwards;
+  animation-delay: 1.15s;
+}
+
+
+/* SPLASH CONTENT */
+
+.openingContent {
+  width: 100%;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  animation: splashIn 0.55s ease-out;
+}
+
+
+/* SPLASH LOGO */
+
+.openingLogo {
+  width: 92px;
+  height: 92px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 26px;
+
+  background: linear-gradient(
+    145deg,
+    #287cff,
+    #1454c4
+  );
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,0.35),
+    0 0 30px rgba(40,124,255,0.25);
+
+  font-size: 48px;
+
+  margin-bottom: 22px;
+
+  animation: logoPulse 1.4s ease-in-out infinite;
+}
+
+
+/* SPLASH TITLE */
+
+.openingTitle {
+  font-size: 38px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  color: #ffffff;
+
+  text-shadow:
+    0 3px 15px rgba(0,0,0,0.3);
+}
+
+
+/* BY SHERIFF */
+
+.openingBy {
+  margin-top: 9px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  color: #6fa7ff;
+
+  letter-spacing: 1px;
+}
+
+
+/* SPLASH SUBTITLE */
+
+.openingSub {
+  margin-top: 10px;
+
+  font-size: 13px;
+
+  color: #aebbd2;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* LOADING BAR */
+
+.openingLoader {
+  width: 38px;
+  height: 4px;
+
+  margin-top: 28px;
+
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.15);
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+.openingLoader::after {
+  content: "";
+
+  position: absolute;
+
+  left: -100%;
+
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: #287cff;
+
+  animation: loaderMove 0.9s ease-in-out infinite;
+}
+
+
+/* SPLASH ANIMATIONS */
+
+@keyframes splashIn {
+
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+}
+
+
+@keyframes logoPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.04);
+  }
+
+}
+
+
+@keyframes loaderMove {
+
+  from {
+    left: -100%;
+  }
+
+  to {
+    left: 100%;
+  }
+
+}
+
+
+@keyframes splashOut {
+
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+}
+
+
+/* =================================
+   MAIN APP
+================================= */
+
+#app {
+  width: 100%;
+  max-width: 650px;
+
+  margin: 0 auto;
+
+  padding: 18px 15px 30px;
+}
+
+
+h1 {
+  text-align: center;
+
+  font-size: 34px;
+
+  margin-top: 5px;
+}
+
+
+.subtitle {
+  text-align: center;
+
+  color: #aebbd2;
+
+  margin: 8px 0 22px;
+}
+
+
+/* =================================
+   LANGUAGE SELECTORS
+================================= */
+
+.languages {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 15px;
+}
+
+
+select {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 50px;
+
+  padding: 0 10px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #13264d;
+
+  color: white;
+
+  font-size: 14px;
+
+  outline: none;
+}
+
+
+.swap {
+  width: 45px;
+  height: 45px;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #287cff;
+
+  color: white;
+
+  font-size: 22px;
+
+  cursor: pointer;
+}
+
+
+/* =================================
+   TEXT CARDS
+================================= */
+
+.card {
+  background: #102247;
+
+  padding: 14px;
+
+  border-radius: 15px;
+
+  margin-bottom: 14px;
+}
+
+
+textarea {
+  display: block;
+
+  width: 100%;
+
+  min-height: 160px;
+
+  resize: vertical;
+
+  border: none;
+
+  outline: none;
+
+  border-radius: 10px;
+
+  padding: 15px;
+
+  font-size: 17px;
+
+  line-height: 1.5;
+
+  background: #f7f9fc;
+
+  color: #111;
+}
+
+
+textarea::placeholder {
+  color: #777;
+}
+
+
+#outputText {
+  background: #eef2f7;
+}
+
+
+.counter {
+  text-align: right;
+
+  color: #8fa2c4;
+
+  font-size: 12px;
+
+  margin-top: 6px;
+}
+
+
+/* =================================
+   TRANSLATE BUTTON
+================================= */
+
+.translate {
+  width: 100%;
+
+  padding: 15px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #287cff;
+
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  margin-bottom: 12px;
+}
+
+
+.translate:disabled {
+  background: #53617a;
+
+  cursor: not-allowed;
+}
+
+
+/* =================================
+   VOICE BUTTONS
+================================= */
+
+.voice-buttons {
+  display: flex;
+
+  gap: 10px;
+
+  margin-bottom: 15px;
+}
+
+
+.voice-btn {
+  flex: 1;
+
+  padding: 13px 8px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background: #173563;
+
+  color: white;
+
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+
+.voice-btn.active {
+  background: #d94b5b;
+}
+
+
+/* =================================
+   ACTION BUTTONS
+================================= */
+
+.actions {
+  display: flex;
+
+  gap: 10px;
+
+  margin-bottom: 15px;
+}
+
+
+.action-btn {
+  flex: 1;
+
+  padding: 12px;
+
+  border: 1px solid #41618f;
+
+  border-radius: 10px;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+
+/* =================================
+   STATUS
+================================= */
+
+.status {
+  text-align: center;
+
+  min-height: 30px;
+
+  margin-bottom: 8px;
+
+  color: #aebbd2;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+.error {
+  color: #ff9b9b;
+}
+
+
+.success {
+  color: #9ee7b0;
+}
+
+
+/* =================================
+   FOOTER
+================================= */
+
+.footer {
+  text-align: center;
+
+  color: #7185a8;
+
+  font-size: 12px;
+
+  margin-top: 25px;
+
+  line-height: 1.5;
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 450px) {
+
+  #app {
+    padding: 18px 14px 30px;
+  }
+
+  h1 {
+    font-size: 29px;
+  }
+
+  select {
+    font-size: 12px;
+  }
+
+  .voice-btn {
+    font-size: 13px;
+  }
+
+  .openingTitle {
+    font-size: 38px;
+  }
+
+  .openingLogo {
+    width: 88px;
+    height: 88px;
+
+    font-size: 45px;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     OPENING SCREEN
+================================= -->
+
+<div id="openingScreen">
+
+  <div class="openingContent">
+
+    <div class="openingLogo">
+      🌍
+    </div>
+
+    <div class="openingTitle">
+      CHAT 254
+    </div>
+
+    <div class="openingBy">
+      by Sheriff
+    </div>
+
+    <div class="openingSub">
+      Smart Multi-Language Translation
+    </div>
+
+    <div class="openingLoader"></div>
+
+  </div>
+
+</div>
+
+
+<!-- =================================
+     MAIN APP
+================================= -->
+
+<div id="app">
+
+  <h1>🌍 CHAT 254</h1>
+
+  <p class="subtitle">
+    Fast, natural and smarter translation
+  </p>
+
+
+  <!-- LANGUAGES -->
+
+  <div class="languages">
+
+    <select id="fromLanguage">
+
+      <option value="en">🇬🇧 English</option>
+      <option value="sw">🇰🇪 Kiswahili</option>
+      <option value="fr">🇫🇷 French</option>
+      <option value="es">🇪🇸 Spanish</option>
+      <option value="de">🇩🇪 German</option>
+      <option value="it">🇮🇹 Italian</option>
+      <option value="pt">🇵🇹 Portuguese</option>
+      <option value="nl">🇳🇱 Dutch</option>
+      <option value="ru">🇷🇺 Russian</option>
+      <option value="ar">🇸🇦 Arabic</option>
+      <option value="zh">🇨🇳 Chinese</option>
+      <option value="ja">🇯🇵 Japanese</option>
+      <option value="ko">🇰🇷 Korean</option>
+      <option value="hi">🇮🇳 Hindi</option>
+      <option value="tr">🇹🇷 Turkish</option>
+      <option value="pl">🇵🇱 Polish</option>
+      <option value="uk">🇺🇦 Ukrainian</option>
+      <option value="el">🇬🇷 Greek</option>
+      <option value="id">🇮🇩 Indonesian</option>
+      <option value="vi">🇻🇳 Vietnamese</option>
+
+    </select>
+
+
+    <button
+      class="swap"
+      id="swapBtn">
+      ⇄
+    </button>
+
+
+    <select id="toLanguage">
+
+      <option value="sw">🇰🇪 Kiswahili</option>
+      <option value="en">🇬🇧 English</option>
+      <option value="fr">🇫🇷 French</option>
+      <option value="es">🇪🇸 Spanish</option>
+      <option value="de">🇩🇪 German</option>
+      <option value="it">🇮🇹 Italian</option>
+      <option value="pt">🇵🇹 Portuguese</option>
+      <option value="nl">🇳🇱 Dutch</option>
+      <option value="ru">🇷🇺 Russian</option>
+      <option value="ar">🇸🇦 Arabic</option>
+      <option value="zh">🇨🇳 Chinese</option>
+      <option value="ja">🇯🇵 Japanese</option>
+      <option value="ko">🇰🇷 Korean</option>
+      <option value="hi">🇮🇳 Hindi</option>
+      <option value="tr">🇹🇷 Turkish</option>
+      <option value="pl">🇵🇱 Polish</option>
+      <option value="uk">🇺🇦 Ukrainian</option>
+      <option value="el">🇬🇷 Greek</option>
+      <option value="id">🇮🇩 Indonesian</option>
+      <option value="vi">🇻🇳 Vietnamese</option>
+
+    </select>
+
+  </div>
+
+
+  <!-- INPUT -->
+
+  <div class="card">
+
+    <textarea
+      id="inputText"
+      maxlength="5000"
+      placeholder="Type, paste or speak your text..."
+    ></textarea>
+
+    <div class="counter">
+      <span id="counter">0</span>/5000
+    </div>
+
+  </div>
+
+
+  <!-- VOICE INPUT -->
+
+  <div class="voice-buttons">
+
+    <button
+      class="voice-btn"
+      id="speakBtn">
+      🎤 Speak
+    </button>
+
+    <button
+      class="voice-btn"
+      id="stopBtn">
+      ⏹️ Stop
+    </button>
+
+  </div>
+
+
+  <!-- TRANSLATE -->
+
+  <button
+    class="translate"
+    id="translateBtn">
+    Translate
+  </button>
+
+
+  <div
+    class="status"
+    id="status">
+  </div>
+
+
+  <!-- OUTPUT -->
+
+  <div class="card">
+
+    <textarea
+      id="outputText"
+      placeholder="Your translation will appear here..."
+      readonly
+    ></textarea>
+
+  </div>
+
+
+  <!-- VOICE OUTPUT -->
+
+  <div class="voice-buttons">
+
+    <button
+      class="voice-btn"
+      id="listenBtn">
+      🔊 Listen
+    </button>
+
+    <button
+      class="voice-btn"
+      id="stopVoiceBtn">
+      ⏹️ Stop Voice
+    </button>
+
+  </div>
+
+
+  <!-- COPY + CLEAR -->
+
+  <div class="actions">
+
+    <button
+      class="action-btn"
+      id="copyBtn">
+      📋 Copy
+    </button>
+
+    <button
+      class="action-btn"
+      id="clearBtn">
+      🧹 Clear
+    </button>
+
+  </div>
+
+
+  <div class="footer">
+
+    CHAT 254<br>
+
+    by Sheriff<br>
+
+    Smart multi-language translation
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =================================
+   ELEMENTS
+================================= */
+
+const inputText =
+  document.getElementById("inputText");
+
+const outputText =
+  document.getElementById("outputText");
+
+const fromLanguage =
+  document.getElementById("fromLanguage");
+
+const toLanguage =
+  document.getElementById("toLanguage");
+
+const translateBtn =
+  document.getElementById("translateBtn");
+
+const swapBtn =
+  document.getElementById("swapBtn");
+
+const speakBtn =
+  document.getElementById("speakBtn");
+
+const stopBtn =
+  document.getElementById("stopBtn");
+
+const listenBtn =
+  document.getElementById("listenBtn");
+
+const stopVoiceBtn =
+  document.getElementById("stopVoiceBtn");
+
+const copyBtn =
+  document.getElementById("copyBtn");
+
+const clearBtn =
+  document.getElementById("clearBtn");
+
+const status =
+  document.getElementById("status");
+
+const counter =
+  document.getElementById("counter");
+
+
+/* =================================
+   VOICE LANGUAGES
+================================= */
+
+const voiceLanguages = {
+
+  en: "en-US",
+  sw: "sw-KE",
+  fr: "fr-FR",
+  es: "es-ES",
+  de: "de-DE",
+  it: "it-IT",
+  pt: "pt-PT",
+  nl: "nl-NL",
+  ru: "ru-RU",
+  ar: "ar-SA",
+  zh: "zh-CN",
+  ja: "ja-JP",
+  ko: "ko-KR",
+  hi: "hi-IN",
+  tr: "tr-TR",
+  pl: "pl-PL",
+  uk: "uk-UA",
+  el: "el-GR",
+  id: "id-ID",
+  vi: "vi-VN"
+
+};
+
+
+/* =================================
+   ENGLISH → KISWAHILI
+================================= */
+
+const englishSwahili = {
+
+  "hello": "habari",
+  "hi": "habari",
+  "hey": "habari",
+
+  "how are you": "habari yako",
+  "how are you?": "habari yako?",
+
+  "i am fine": "niko sawa",
+  "i'm fine": "niko sawa",
+  "i am okay": "niko sawa",
+  "i'm okay": "niko sawa",
+  "i am good": "niko vizuri",
+  "i'm good": "niko vizuri",
+
+  "good morning": "habari ya asubuhi",
+  "good afternoon": "habari ya mchana",
+  "good evening": "habari ya jioni",
+  "good night": "usiku mwema",
+
+  "thank you": "asante",
+  "thanks": "asante",
+  "thank you very much": "asante sana",
+  "thanks a lot": "asante sana",
+
+  "please": "tafadhali",
+  "welcome": "karibu",
+  "you are welcome": "karibu",
+  "you're welcome": "karibu",
+
+  "yes": "ndiyo",
+  "no": "hapana",
+  "maybe": "labda",
+  "of course": "bila shaka",
+
+  "why": "kwa nini",
+  "what": "nini",
+  "who": "nani",
+  "where": "wapi",
+  "when": "lini",
+  "how": "vipi",
+  "which": "ipi",
+
+  "i don't know": "sijui",
+  "i know": "najua",
+  "i understand": "naelewa",
+  "i don't understand": "sielewi",
+  "do you understand": "unaelewa",
+
+  "wait": "subiri",
+  "wait for me": "nisubiri",
+  "come here": "njoo hapa",
+  "go there": "enda huko",
+  "come with me": "njoo nami",
+  "follow me": "nifuate",
+
+  "i am tired": "nimechoka",
+  "i'm tired": "nimechoka",
+  "i am hungry": "nina njaa",
+  "i'm hungry": "nina njaa",
+  "i am thirsty": "nina kiu",
+  "i'm thirsty": "nina kiu",
+  "i am happy": "nina furaha",
+  "i'm happy": "nina furaha",
+  "i am sad": "nina huzuni",
+  "i'm sad": "nina huzuni",
+
+  "i am ready": "niko tayari",
+  "i'm ready": "niko tayari",
+
+  "what is your name": "jina lako ni nani",
+  "my name is": "jina langu ni",
+  "where are you": "uko wapi",
+  "where are you going": "unaenda wapi",
+  "where do you live": "unaishi wapi",
+  "what are you doing": "unafanya nini",
+  "what happened": "nini kilitokea",
+  "what do you want": "unataka nini",
+
+  "i want": "nataka",
+  "i need": "nahitaji",
+  "i like it": "naipenda",
+  "i don't like it": "siipendi",
+
+  "i love you": "nakupenda",
+  "i miss you": "nimekukosa",
+  "i trust you": "ninakuamini",
+
+  "help": "msaada",
+  "help me": "nisaidie",
+  "please help me": "tafadhali nisaidie",
+
+  "good": "nzuri",
+  "very good": "nzuri sana",
+  "bad": "mbaya",
+  "very bad": "mbaya sana",
+  "beautiful": "mrembo",
+  "amazing": "ajabu",
+  "excellent": "bora sana",
+
+  "goodbye": "kwaheri",
+  "bye": "kwaheri",
+  "see you": "tutaonana",
+  "see you later": "tutaonana baadaye",
+  "see you tomorrow": "tutaonana kesho",
+  "have a nice day": "uwe na siku njema",
+  "take care": "jichunge",
+  "good luck": "bahati njema",
+
+  "today": "leo",
+  "tomorrow": "kesho",
+  "yesterday": "jana",
+  "now": "sasa",
+  "later": "baadaye",
+
+  "one": "moja",
+  "two": "mbili",
+  "three": "tatu",
+  "four": "nne",
+  "five": "tano",
+  "six": "sita",
+  "seven": "saba",
+  "eight": "nane",
+  "nine": "tisa",
+  "ten": "kumi",
+
+  "friend": "rafiki",
+  "my friend": "rafiki yangu",
+  "family": "familia",
+  "mother": "mama",
+  "father": "baba",
+  "brother": "kaka",
+  "sister": "dada",
+  "child": "mtoto",
+  "children": "watoto",
+  "teacher": "mwalimu",
+  "student": "mwanafunzi",
+
+  "school": "shule",
+  "home": "nyumbani",
+  "house": "nyumba",
+  "work": "kazi",
+  "food": "chakula",
+  "water": "maji",
+  "money": "pesa",
+  "phone": "simu",
+  "car": "gari",
+  "book": "kitabu",
+
+  "i am going home": "naenda nyumbani",
+  "i'm going home": "naenda nyumbani",
+  "i am at home": "niko nyumbani",
+  "i'm at home": "niko nyumbani",
+  "i am going to school": "naenda shuleni",
+  "i'm going to school": "naenda shuleni",
+  "i am at school": "niko shuleni",
+  "i'm at school": "niko shuleni",
+
+  "let's go": "twende",
+  "let us go": "twende",
+  "come": "njoo",
+  "go": "enda",
+  "stop": "simama",
+
+  "what time is it": "ni saa ngapi",
+  "what day is today": "leo ni siku gani",
+  "what is happening": "nini kinaendelea",
+  "can you help me": "unaweza kunisaidia",
+  "can you help me?": "unaweza kunisaidia?",
+  "don't worry": "usiwe na wasiwasi",
+  "no problem": "hakuna shida",
+  "it's okay": "ni sawa",
+  "that is good": "hiyo ni nzuri",
+  "that is bad": "hiyo ni mbaya",
+
+  "kenya is beautiful": "Kenya ni nzuri",
+  "welcome to kenya": "karibu Kenya",
+  "i love kenya": "naipenda Kenya"
+
+};
+
+
+/* =================================
+   KISWAHILI → ENGLISH
+================================= */
+
+const swahiliEnglish = {
+
+  "habari": "hello",
+  "mambo": "hello",
+  "mambo vipi": "how are things?",
+  "poa": "cool",
+  "safi": "good",
+
+  "habari yako": "how are you?",
+  "habari yako?": "how are you?",
+  "hujambo": "hello",
+  "sijambo": "i am fine",
+
+  "asante": "thank you",
+  "asante sana": "thank you very much",
+  "tafadhali": "please",
+  "karibu": "welcome",
+
+  "ndiyo": "yes",
+  "hapana": "no",
+  "labda": "maybe",
+
+  "kwa nini": "why",
+  "nini": "what",
+  "nani": "who",
+  "wapi": "where",
+  "lini": "when",
+  "vipi": "how",
+
+  "sijui": "i don't know",
+  "najua": "i know",
+  "naelewa": "i understand",
+  "sielewi": "i don't understand",
+  "unaelewa": "do you understand",
+
+  "subiri": "wait",
+  "nisubiri": "wait for me",
+  "njoo": "come",
+  "njoo hapa": "come here",
+  "enda": "go",
+  "twende": "let's go",
+  "nifuate": "follow me",
+
+  "nimechoka": "i am tired",
+  "nina njaa": "i am hungry",
+  "nina kiu": "i am thirsty",
+  "nina furaha": "i am happy",
+  "nina huzuni": "i am sad",
+  "niko tayari": "i am ready",
+
+  "jina lako ni nani": "what is your name",
+  "jina langu ni": "my name is",
+  "uko wapi": "where are you",
+  "unaenda wapi": "where are you going",
+  "unaishi wapi": "where do you live",
+  "unafanya nini": "what are you doing",
+  "nini kilitokea": "what happened",
+  "unataka nini": "what do you want",
+
+  "nataka": "i want",
+  "nahitaji": "i need",
+  "naipenda": "i like it",
+  "siipendi": "i don't like it",
+
+  "nakupenda": "i love you",
+  "nimekukosa": "i miss you",
+  "ninakuamini": "i trust you",
+
+  "msaada": "help",
+  "nisaidie": "help me",
+  "tafadhali nisaidie": "please help me",
+
+  "nzuri": "good",
+  "nzuri sana": "very good",
+  "mbaya": "bad",
+  "mbaya sana": "very bad",
+  "mrembo": "beautiful",
+  "ajabu": "amazing",
+  "bora sana": "excellent",
+
+  "kwaheri": "goodbye",
+  "tutaonana": "see you",
+  "tutaonana baadaye": "see you later",
+  "tutaonana kesho": "see you tomorrow",
+  "uwe na siku njema": "have a nice day",
+  "jichunge": "take care",
+  "bahati njema": "good luck",
+
+  "leo": "today",
+  "kesho": "tomorrow",
+  "jana": "yesterday",
+  "sasa": "now",
+  "baadaye": "later",
+
+  "moja": "one",
+  "mbili": "two",
+  "tatu": "three",
+  "nne": "four",
+  "tano": "five",
+  "sita": "six",
+  "saba": "seven",
+  "nane": "eight",
+  "tisa": "nine",
+  "kumi": "ten",
+
+  "rafiki": "friend",
+  "rafiki yangu": "my friend",
+  "familia": "family",
+  "mama": "mother",
+  "baba": "father",
+  "kaka": "brother",
+  "dada": "sister",
+  "mtoto": "child",
+  "watoto": "children",
+  "mwalimu": "teacher",
+  "mwanafunzi": "student",
+
+  "shule": "school",
+  "nyumbani": "home",
+  "nyumba": "house",
+  "kazi": "work",
+  "chakula": "food",
+  "maji": "water",
+  "pesa": "money",
+  "simu": "phone",
+  "gari": "car",
+  "kitabu": "book",
+
+  "naenda nyumbani": "i am going home",
+  "niko nyumbani": "i am at home",
+  "naenda shuleni": "i am going to school",
+  "niko shuleni": "i am at school",
+
+  "ni saa ngapi": "what time is it",
+  "leo ni siku gani": "what day is today",
+  "nini kinaendelea": "what is happening",
+  "unaweza kunisaidia": "can you help me",
+  "usiwe na wasiwasi": "don't worry",
+  "hakuna shida": "no problem",
+  "ni sawa": "it's okay",
+  "hiyo ni nzuri": "that is good",
+  "hiyo ni mbaya": "that is bad",
+
+  "kenya ni nzuri": "Kenya is beautiful",
+  "karibu kenya": "welcome to Kenya",
+  "naipenda kenya": "i love Kenya"
+
+};
+
+
+/* =================================
+   NORMALIZE TEXT
+================================= */
+
+function normalizeText(text) {
+
+  return text
+    .trim()
+    .toLowerCase()
+    .replace(/[’‘]/g, "'")
+    .replace(/\s+/g, " ")
+ 
